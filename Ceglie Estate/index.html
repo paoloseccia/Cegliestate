@@ -94,6 +94,7 @@
         
         <!-- Scripts section -->
         
+        <script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
         <script src="cordova.js"></script>        
         <script src="kendo/js/jquery.min.js"></script>
         <script src="kendo/js/kendo.mobile.min.js"></script>
@@ -145,7 +146,7 @@
                 navigator.splashscreen.hide();
             }
             
-            var app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home" });
+            var app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home", platform: "ios" });
         </script>
     </body>
 </html>

@@ -1,49 +1,48 @@
+.km-pane{
+    font-family: 'Apple symbols';
+}
 
-.km-ios .km-view .km-content,
-.km-android .km-view .km-content
+.km-view .km-content .km-group-title{
+    color:rgba(0, 0, 0, .7);
+    text-shadow: 0px 0px 0px;
+}
+
+.km-view .km-content,
+.km-view .km-content
 {
     background: url('../images/backg.jpg');
     background-size: 100% auto; 
  }
 
-.km-ios .km-listview .km-list,
-.km-android .km-listview .km-list
-{
-	border-radius: 10px;
-	-webkit-border-radius: 10px;
-	/*box-shadow: 0 1px 5px #95764D;
-	-webkit-box-shadow: 0 1px 5px #95764D;*/
-}
 
-.km-ios .km-listview .km-list > li,
-.km-android .km-listview .km-list > li
+.km-listview .km-list > li,
+.km-listview .km-list > li
 {
 	background:rgba(255,255,255,.66);
     color:rgba(0, 0, 0, .8);
-    font-family: 'Apple symbols'
 }
 
 
-/*
-
-.km-ios  .km-navbar
-{
-background: rgba(64, 124, 71, .8);
-    
+.km-ios .km-view .km-navbar {
+    background-image: -webkit-gradient(linear,50% rgba(0,0 0 0.2),color-stop(.5, rgba(0,0,0,.4)),color-stop(.5, rgba(0,0,0,.5)),color-stop(1, rgba(0,0,0,.8)));
+    background-image: -moz-linear-gradient(rgba(0,0 0 0.2),rgba(0,0,0,.4) 50%,rgba(0,0,0,.5) 50%,rgba(0,0,0,.8));
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-color: rgb(0, 0, 0);
+    -moz-border-radius:0;
+    -webkit-border-radius:0;
+    border-radius:0;
+}
+.km-ios .km-view .km-navbar .km-button {
+    background-image: -webkit-gradient(linear,50% rgba(0,0 0 0.2),color-stop(.5, rgba(0,0,0,.4)),color-stop(.5, rgba(0,0,0,.5)),color-stop(1, rgba(0,0,0,.8)));
+    background-image: -moz-linear-gradient(rgba(0,0 0 0.2),rgba(0,0,0,.4) 50%,rgba(0,0,0,.5) 50%,rgba(0,0,0,.8));
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-color: rgb(0, 0, 0);
 }
 
 
-.km-tablet .km-ios .km-view-title
-{
-	color: #fff;
-	text-shadow: 0 -1px rgba(0, 0, 0, .5);
-}
-.km-ios .km-navbar .km-button
-{
-	background-color: rgba(0, 0, 0, .8);
-}
 
-*/
 
 #map{
     width:100%;
