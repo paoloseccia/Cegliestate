@@ -62,7 +62,7 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\backg.jpg" />
+    <Content Include="styles\backg.jpg" />
     <Content Include="images\bottom_logo-ceglie.png" />
     <Content Include="images\li.png" />
     <Content Include="images\logo-x-app.png" />

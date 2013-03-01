@@ -9,7 +9,7 @@
 
 .km-ios .km-view .km-content 
 {
-    background: url('../images/backg.jpg');
+    background: url('backg.jpg');
     background-position: 0% 0%;
     background-size: 100% auto; 
  }
