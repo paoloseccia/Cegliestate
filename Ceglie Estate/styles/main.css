@@ -1,94 +1,117 @@
-.km-pane{
-    font-family: 'Apple symbols';
-}
 
-.km-view .km-content .km-group-title{
-    color:rgba(0, 0, 0, .7);
-    text-shadow: 0px 0px 0px;
-}
-
-
-.km-ios .km-view .km-content 
+.km-view .km-navbar
 {
-    background: url('/images/sfondo.jpg');
-    background-position: 0% 0%;
-    background-size: 100% auto; 
- }
+	font-family: 'Apple symbols';
+	color: rgba(0, 0, 0, .7);
+	text-shadow: 0px 0px 0px;
+}
 
+.km-view .km-content
+{
+	font-family: 'Apple symbols';
+	color: rgba(0, 0, 0, .7);
+	text-shadow: 0px 0px 0px;
+}
+
+.km-view .km-content .km-group-title
+{
+	color: rgba(0, 0, 0, .7);
+	text-shadow: 0px 0px 0px;
+}
+
+.km-view .km-content 
+{
+	background: url('/images/sfondo.jpg');
+	background-position: 0% 0%;
+	background-size: 100% auto; 
+}
 
 .km-listview .km-list > li,
 .km-listview .km-list > li
 {
-	background:rgba(255,255,255,.66);
-    color:rgba(0, 0, 0, .8);
+	background: rgba(255, 255, 255, .66);
+	color: rgba(0, 0, 0, .8);
 }
 
-
-.km-ios .km-view .km-navbar {
-    background-image: -webkit-gradient(linear,50% rgba(0,0 0 0.2),color-stop(.5, rgba(0,0,0,.4)),color-stop(.5, rgba(0,0,0,.5)),color-stop(1, rgba(0,0,0,.8)));
-    background-image: -moz-linear-gradient(rgba(0,0 0 0.2),rgba(0,0,0,.4) 50%,rgba(0,0,0,.5) 50%,rgba(0,0,0,.8));
-    background-repeat: repeat;
-    background-position: 0 0;
-    background-color: rgb(0, 0, 0);
-    -moz-border-radius:0;
-    -webkit-border-radius:0;
-    border-radius:0;
+.km-view .km-navbar
+{
+	background-image: -webkit-gradient(linear, 50% rgba(0, 0 0 0.2), color-stop(.5, rgba(0, 0, 0, .4)), color-stop(.5, rgba(0, 0, 0, .5)), color-stop(1, rgba(0, 0, 0, .8)));
+	background-image: -moz-linear-gradient(rgba(0, 0 0 0.2), rgba(0, 0, 0, .4) 50%, rgba(0, 0, 0, .5) 50%, rgba(0, 0, 0, .8));
+	background-repeat: repeat;
+	background-position: 0 0;
+	background-color: rgb(0, 0, 0);
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
 }
-.km-ios .km-view .km-navbar .km-button {
-    background-image: -webkit-gradient(linear,50% rgba(0,0 0 0.2),color-stop(.5, rgba(0,0,0,.4)),color-stop(.5, rgba(0,0,0,.5)),color-stop(1, rgba(0,0,0,.8)));
-    background-image: -moz-linear-gradient(rgba(0,0 0 0.2),rgba(0,0,0,.4) 50%,rgba(0,0,0,.5) 50%,rgba(0,0,0,.8));
-    background-repeat: repeat;
-    background-position: 0 0;
-    background-color: rgb(0, 0, 0);
-}
-
-
-
-
-#map{
-    width:100%;
-    height: 300px;
+.km-view .km-navbar .km-button
+{
+	background-image: -webkit-gradient(linear, 50% rgba(0, 0 0 0.2), color-stop(.5, rgba(0, 0, 0, .4)), color-stop(.5, rgba(0, 0, 0, .5)), color-stop(1, rgba(0, 0, 0, .8)));
+	background-image: -moz-linear-gradient(rgba(0, 0 0 0.2), rgba(0, 0, 0, .4) 50%, rgba(0, 0, 0, .5) 50%, rgba(0, 0, 0, .8));
+	background-repeat: repeat;
+	background-position: 0 0;
+	background-color: rgb(0, 0, 0);
 }
 
 
 
-.item-photo {
-    width: 3em;
-    height: 3em;
-    float: left;
-    margin: .5em 0;
-    -webkit-box-shadow: 0 1px 3px #333;
-    box-shadow: 0 1px 3px #333;
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
+/* Application style */
+
+#map
+{
+	width: 100%; height: 200px; position: absolute;
 }
 
-.item-title {
+.item-photo
+{
+	width: 3em;
+	height: 3em;
+	float: left;
+	margin: .5em 0;
+	-webkit-box-shadow: 0 1px 3px #333;
+	box-shadow: 0 1px 3px #333;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+}
+
+.item-title
+{
 	float: left;
 	font-size: 1em;
-    line-height: 1.4em;
-    margin: .3em 1em 0 .6em;
-    width: 50%;
+	line-height: 1.4em;
+	margin: .3em 1em 0 .6em;
+	width: 50%;
 }
 
-.item-info {
+.item-info
+{
 	float: left;
 	font-size: .5em;
 	line-height: 1em;
-    margin: 0 0 0 .95em;
-    width: 45%;
+	margin: 0 0 0 .95em;
+	width: 45%;
 }
 
-.item-desc {
+.item-desc
+{
 	float: left;
 	font-size: .7em;
 	line-height: 1em;
-    margin: 0 0 0 .95em;
-    width: 45%;
+	margin: 0 0 0 .95em;
+	width: 45%;
 }
 
+.advertise
+{
+	background: rgba(64, 124, 71, .8);
+	height: 3em;
+}
 
-.advertise{
-    background:  rgba(64, 124, 71, .8);
-    height: 3em;
+.button
+{
+	background-image: -webkit-gradient(linear, 50% rgba(0, 0 0 0.2), color-stop(.5, rgba(0, 0, 0, .4)), color-stop(.5, rgba(0, 0, 0, .5)), color-stop(1, rgba(0, 0, 0, .8)));
+	background-image: -moz-linear-gradient(rgba(0, 0 0 0.2), rgba(0, 0, 0, .4) 50%, rgba(0, 0, 0, .5) 50%, rgba(0, 0, 0, .8));
+	background-repeat: repeat;
+	background-position: 0 0;
+	background-color: rgb(0, 0, 0);
 }

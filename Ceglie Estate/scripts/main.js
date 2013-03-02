@@ -2,7 +2,8 @@
 	var _app,
     	_mapElem,
     	_private,
-        _mapObj;
+        _mapObj,
+        _address;
     
 	//Private methods
 	_private = {		
@@ -21,9 +22,8 @@
     				zoom: 16,
                     center: results[0].geometry.location,
     				mapTypeControl: false,
-                    draggable:false,
                     streetViewControl: false,
-    				//navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL },
+    				navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL },
     				mapTypeId: google.maps.MapTypeId.ROADMAP
     			};
             
@@ -32,12 +32,15 @@
                 new google.maps.Marker({
                     map: _mapObj,
                     position: results[0].geometry.location,
-                    animation:google.maps.Animation.DROP
+                    //animation:google.maps.Animation.DROP
                 });
+                  
+                google.maps.event.trigger(_mapObj, "resize");
                   
                 
               } 
-            });           
+            }); 
+            
 		},
         
         getData:function(dataSource, url){            
@@ -136,9 +139,9 @@
             
         },
         
-		locationEventShow: function(address) {
+		locationEventShow: function() {
             _mapElem = document.getElementById("map");			
-            _private.initMap(address);
+            _private.initMap(_address);
 		},
         
         showEventList: function(e){
@@ -193,11 +196,7 @@
                     dataSource: dataSource,
                     template: $("#evento-details-template").text(),
                 });
-            
-            _app.locationEventShow(e.view.params.address);
-            
-            if(_mapObj != null)
-                google.maps.event.trigger(_mapObj, "resize");
+            _address = e.view.params.address;           
         }
 	};
     
@@ -205,6 +204,7 @@
 	$.extend(window, {
         showEventDetails: _app.showEventDetails,
         showEventList: _app.showEventList,
-        initApp: _app.initApp
+        initApp: _app.initApp,
+        locationEventShow:_app.locationEventShow
 	});
 }(jQuery, document));
