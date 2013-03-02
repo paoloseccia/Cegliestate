@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\logo-x-app.png" />
+    <Content Include="images\sfondo.jpg" />
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.min.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />
