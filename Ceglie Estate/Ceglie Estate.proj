@@ -62,8 +62,6 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\bottom_logo-ceglie.png" />
-    <Content Include="images\li.png" />
     <Content Include="images\logo-x-app.png" />
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.min.js" />
