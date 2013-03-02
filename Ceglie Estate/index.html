@@ -1,154 +1,163 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Ceglie Estate</title>
-        <meta charset="utf-8" />      
-        
-        
-        <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-        <link href="styles/main.css" rel="stylesheet" />
-    </head>
-    <body>
-        
-       
-        <!-- Page Layout -->
-        <section data-role="view" id="home" data-title="Ceglie Estate 2013" data-init="dayEvent">
-            
-            <header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title">Ceglie Estate 2013</span>
-                </div>
-            </header>
-            
-            <div data-role="content">                
-                
-                <ul data-role="listview" data-style="inset" data-type="group">
-                    <li>Eventi del giorno
-                        <ul id="day-listview"></ul>
-                    </li>
-                    
-                    <li>
-                        Scopri glie eventi del mese
-                        <ul>
-                            <li><a href="#eventi-listview?mese=giugno">Giugno</a></li>
-                            <li><a href="#eventi-listview?mese=luglio">Luglio</a></li>
-                            <li><a href="#eventi-listview?mese=agosto">Agosto</a></li>
-                            <li><a href="#eventi-listview?mese=settembre">Settembre</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        Info
-                        <ul><li>Scopri chi siamo</li></ul>
-                    </li>
-                </ul>
-            </div>
-            
-            <div data-role="footer" class="advertise"></div>
-        </section>
-     
-        
-        <div data-role="view" id="eventi-listview"  data-show="showEventList">
-            
-            <header data-role="header">
-                <div data-role="navbar">
-                    <a id="back-button" class="nav-button" data-align="left" data-role="backbutton">Back</a>
-                    <span data-role="view-title"></span>
-                </div>
-            </header> 
-            
-            <div data-role="content" >
-                <ul data-role="listview"  data-style="inset" data-type="group">
-                    <li>
-                        <ul id="flat-listview"></ul>
-                    </li>
-                </ul>
-            </div>
-            <div data-role="footer" class="advertise"></div>
-        </div>
-        
-        <div data-role="view" id="evento-details"  data-show="showEventDetails">
-            
-            <header data-role="header">
-                <div data-role="navbar">
-                    <a id="back-button" class="nav-button" data-align="left" data-role="backbutton">Back</a>
-                    <span data-role="view-title">Dettaglio</span>                    
-                    <a data-align="right" data-icon="share" data-role="button" href="#">Share</a>
-                </div>
-            </header> 
-            
-            <div data-role="content">
-                <ul data-role="listview" data-style="inset" data-type="group">
-                    <li>
-                        <ul id="flat-details-listview"></ul>
-                    </li>
-                    <li>
-                        Mappa
-                        <ul><li><div id="map"></div></li></ul>
-                    </li>
-                </ul>
-            </div>
-            <div data-role="footer" class="advertise"></div>
-        </div>
-        
-        
-        <!-- Scripts section -->
-        
-        
-      
-        <script src="kendo/js/jquery.min.js"></script>
-        <script src="kendo/js/kendo.mobile.min.js"></script>
-        <script src="scripts/main.js"></script>
-        
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        
-        <script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
-     
-        
-        <script id="eventi-template" type="text/x-kendo-template">
-            
-            <a href="\#evento-details?nome=${nome}&data=${data}&ora=${ora}&descrizione=${descrizione}&address=${indirizzo}">            
-                <img class="item-photo" src="images/logo-x-app.png" />
-                <h3 class="item-title">${nome}</h3>
-                <p class="item-info">${data} Ore ${ora}</p>
-                <p class="item-desc">${descrizione}</p>
-            </a>
-                     
-        </script>
-        
-        <script id="evento-details-template" type="text/x-kendo-template">
-            <h1>${nome}</h1>
-            <p>#=data# Ore #=ora#</p>
-            <p>#=descrizione#</p>
-        </script>
-        
-        <script id="evento-day-template" type="text/x-kendo-template">
-                      
-            #if(tot_e === 0){#
-                <p>Non ci sono eventi</p>
-            #}else if (tot_e === 1){#
-                <a href="\#evento-details?nome=${nome}&data=${data}&ora=${ora}&descrizione=${descrizione}&address=${indirizzo}">            
-                    <img class="item-photo" src="images/logo-x-app.png" />
-                    <h3 class="item-title">${nome}</h3>
-                    <p class="item-info">${data} Ore ${ora}</p>
-                    <p class="item-desc">${descrizione}</p>
-                </a>
-            #}else{#
-                 <a href="\#eventi-listview?mese=days" >Oggi ci sono ${tot_e} eventi</a> 
-            #}#
-            
-        </script>
-        
-        <script>
-            // Wait for PhoneGap to load
-            document.addEventListener("deviceready", onDeviceReady, false);
+	<head>
+		<title>Ceglie Estate</title>
+		<meta charset="utf-8" />
 
-            // PhoneGap is ready
-            function onDeviceReady() {
-                initApp();
-            }
+		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+		<link href="styles/main.css" rel="stylesheet" />
+	</head>
+	<body>
+
+		<!-- Page Layout -->
+		<section data-role="view" id="home" data-title="Ceglie Estate 2013" data-init="dayEvent">
+
+			<header data-role="header">
+				<div data-role="navbar">
+					<span data-role="view-title">Ceglie Estate 2013</span>
+				</div>
+			</header>
+
+			<div data-role="content">
+
+				<ul data-role="listview" data-style="inset" data-type="group">
+					<li>
+						Eventi del giorno
+						<ul id="day-listview"></ul>
+					</li>
+
+					<li>
+						Scopri glie eventi del mese
+						<ul>
+							<li>
+								<a href="#eventi-listview?mese=giugno">Giugno</a>
+							</li>
+							<li>
+								<a href="#eventi-listview?mese=luglio">Luglio</a>
+							</li>
+							<li>
+								<a href="#eventi-listview?mese=agosto">Agosto</a>
+							</li>
+							<li>
+								<a href="#eventi-listview?mese=settembre">Settembre</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						Info
+						<ul>
+							<li>Scopri chi siamo</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+			<div data-role="footer" class="advertise"></div>
+		</section>
+
+		<div data-role="view" id="eventi-listview"  data-show="showEventList">
+
+			<header data-role="header">
+				<div data-role="navbar">
+					<a id="back-button" class="nav-button" data-align="left" data-role="backbutton">Back</a>
+					<span data-role="view-title"></span>
+				</div>
+			</header>
+
+			<div data-role="content" >
+				<ul data-role="listview"  data-style="inset" data-type="group">
+					<li>
+						<ul id="flat-listview"></ul>
+					</li>
+				</ul>
+			</div>
+			<div data-role="footer" class="advertise"></div>
+		</div>
+
+		<div data-role="view" id="evento-details"  data-show="showEventDetails">
+
+			<header data-role="header">
+				<div data-role="navbar">
+					<a id="back-button" class="nav-button" data-align="left" data-role="backbutton">Back</a>
+					<span data-role="view-title">Dettaglio</span>
+					<a data-align="right" data-icon="share" data-role="button" href="#">Share</a>
+				</div>
+			</header>
+
+			<div data-role="content">
+				<ul data-role="listview" data-style="inset" data-type="group">
+					<li>
+						<ul id="flat-details-listview"></ul>
+					</li>
+					<li>
+						Mappa
+						<ul>
+							<li>
+								<div id="map"></div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div data-role="footer" class="advertise"></div>
+		</div>
+
+		<!-- Scripts section -->
+		<script src="kendo/js/jquery.min.js"></script>
+		<script src="kendo/js/kendo.mobile.min.js"></script>
+
+		<script src="scripts/main.js"></script>
+
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
+
+		<script id="eventi-template" type="text/x-kendo-template">
+
+			<a href="\#evento-details?nome=${nome}&data=${data}&ora=${ora}&descrizione=${descrizione}&address=${indirizzo}">
+				<img class="item-photo" src="images/logo-x-app.png" />
+				<h3 class="item-title">${nome}</h3>
+				<p class="item-info">${data} Ore ${ora}</p>
+				<p class="item-desc">${descrizione}</p>
+			</a>
+                     
+		</script>
+
+		<script id="evento-details-template" type="text/x-kendo-template">
+			<h1>${nome}</h1>
+			<p>#=data# Ore #=ora#</p>
+			<p>#=descrizione#</p>
+		</script>
+
+		<script id="evento-day-template" type="text/x-kendo-template">
+                      
+			#if (tot_e === 0) {#
+				<p>Non ci sono eventi</p>
+			#}
+			else if (tot_e === 1) {#
+				<a href="\#evento-details?nome=${nome}&data=${data}&ora=${ora}&descrizione=${descrizione}&address=${indirizzo}">
+					<img class="item-photo" src="images/logo-x-app.png" />
+					<h3 class="item-title">${nome}</h3>
+					<p class="item-info">${data} Ore ${ora}</p>
+					<p class="item-desc">${descrizione}</p>
+				</a>
+			#}
+			else {#
+				<a href="\#eventi-listview?mese=days" >Oggi ci sono ${tot_e} eventi</a> 
+			#}#
             
-            var app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home", platform: "ios" });
-        </script>
-    </body>
+		</script>
+			
+		<script>
+			// Wait for PhoneGap to load
+			document.addEventListener("deviceready", onDeviceReady, false);
+			
+			// PhoneGap is ready
+			function onDeviceReady() {
+				initApp();
+			}
+		
+			var app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home", platform: "ios" });
+		</script>
+	</body>
 </html>
