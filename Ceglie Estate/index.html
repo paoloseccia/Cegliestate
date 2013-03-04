@@ -54,8 +54,9 @@
 		<div data-role="view" id="eventi-listview"  data-show="showEventList">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="back-button" class="nav-button" data-align="left" data-role="backbutton">Back</a>
+					<a  class="nav-button" data-align="left" data-role="backbutton">Back</a>
 					<span data-role="view-title"></span>
+                    <a  data-align="right" data-role="button" data-icon="search" data-rel="actionsheet" href="#searchActions"></a>
 				</div>
 			</header>
 
@@ -66,6 +67,9 @@
 					</li>
 				</ul>
 			</div>
+            <ul data-role="actionsheet" id="searchActions"  data-popup='{"direction": "left"}'>
+                <li><input type="search"  /></li>
+            </ul>
 			<div data-role="footer" class="advertise"></div>
 		</div>
 
@@ -73,7 +77,7 @@
 		<div data-role="view" id="evento-details"  data-show="showEventDetails">
 			<header data-role="header">
 				<div data-role="navbar">
-					<a id="back-button" class="nav-button" data-align="left" data-role="backbutton">Back</a>
+					<a  class="nav-button" data-align="left" data-role="backbutton">Back</a>
 					<span data-role="view-title">Dettaglio</span>
 				</div>
 			</header>
