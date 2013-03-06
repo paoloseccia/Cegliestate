@@ -109,24 +109,19 @@
                 
                 <div class="search-header">
                     <form action="javascript:searchAction();">
-                                        <input id="input_search_word" type="search" 
-                                            placeholder="Cerca evento" autocapitalize="off" autocorrect="off"/>
+                        <input id="input_search_word" type="search" 
+                            placeholder="Cerca evento" autocapitalize="off" autocorrect="off"/>
                     </form>
                 </div>
-			</header>
-            
-                
+			</header>                
             <div data-role="content"> 
-                
                 <ul data-role="listview"  data-style="inset" data-type="group">
             		<li>
                         <ul id="search-result-listview"></ul>
             		</li>
             	</ul>
             </div>
-            
 		</div>
-        
      
         
         <!-- Mappa -->        
@@ -185,8 +180,7 @@
 			
 		<script>
 			// Wait for PhoneGap to load
-			document.addEventListener("deviceready", onDeviceReady, false);
-              
+			document.addEventListener("deviceready", onDeviceReady, false);   
 			
 			// PhoneGap is ready
 			function onDeviceReady() {
