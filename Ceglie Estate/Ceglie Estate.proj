@@ -36,6 +36,16 @@
       <Platform>Android</Platform>
     </Folder>
     <Folder Include="images" />
+    <Folder Include="res" />
+    <Folder Include="res\icon" />
+    <Folder Include="res\icon\android" />
+    <Folder Include="res\icon\android\drawable-hdpi" />
+    <Folder Include="res\icon\android\drawable-ldpi" />
+    <Folder Include="res\icon\android\drawable-mdpi" />
+    <Folder Include="res\icon\ios" />
+    <Folder Include="res\screen" />
+    <Folder Include="res\screen\android" />
+    <Folder Include="res\screen\ios" />
     <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +72,7 @@
     <Resource Include="App_Resources\Android\drawable-nodpi\splashscreen.9.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="conf.xml" />
     <Content Include="images\logo-x-app.png" />
     <Content Include="images\sfondo.jpg" />
     <Content Include="index.html" />
@@ -71,6 +82,18 @@
     <Content Include="kendo\styles\images\KendoUI.ttf" />
     <Content Include="kendo\styles\images\KendoUI.woff" />
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
+    <Content Include="res\icon\android\drawable-hdpi\icon.png" />
+    <Content Include="res\icon\android\drawable-ldpi\icon.png" />
+    <Content Include="res\icon\android\drawable-mdpi\icon.png" />
+    <Content Include="res\icon\ios\icon-72.png" />
+    <Content Include="res\icon\ios\icon-72@2x.png" />
+    <Content Include="res\icon\ios\icon.png" />
+    <Content Include="res\icon\ios\icon@2x.png" />
+    <Content Include="res\screen\android\Default.png" />
+    <Content Include="res\screen\ios\Default-Landscape.png" />
+    <Content Include="res\screen\ios\Default-Portrait.png" />
+    <Content Include="res\screen\ios\Default.png" />
+    <Content Include="res\screen\ios\Default@2x.png" />
     <Content Include="scripts\main.js" />
     <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">
