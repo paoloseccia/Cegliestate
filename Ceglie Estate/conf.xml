@@ -47,5 +47,12 @@
 	<gap:splash src="res/screen/ios/Default@2x.png"                gap:platform="ios"     width="640" height="960" />
 	<gap:splash src="res/screen/ios/Default-Portrait.png"          gap:platform="ios"     width="768" height="1024" />
 	<gap:splash src="res/screen/ios/Default-Landscape.png"         gap:platform="ios"     width="1024" height="768" />
+
+
+    <!-- to enable individual permissions use the following examples -->
+    <feature name="http://api.phonegap.com/1.0/file"/>
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+    <feature name="http://api.phonegap.com/1.0/notification"/>
 	
 </widget>
