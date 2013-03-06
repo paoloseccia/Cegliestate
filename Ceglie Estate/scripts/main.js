@@ -3,7 +3,8 @@
     	_mapElem,
     	_private,
         _mapObj,
-        _address;
+        _address,
+        _mese;
     
 	//Private methods
 	_private = {		
@@ -110,6 +111,14 @@
                         dataSource: ds,
                         template: $("#evento-day-template").text(),
                     });
+        },
+        
+        clearSearchList:function(){
+            if($("#input_search_word").val().length <=1){
+                 $("#search-result-listview").kendoMobileListView({
+                     dataSource:[]
+                 });
+            }
         }
 		
 	};
@@ -134,9 +143,16 @@
             //Update settembre
             _private.getData('settembre', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate_settembre.json');
             
-            //Update day event
+            //Update day eventconsole
             _private.getDayEvent();
             
+            
+            $("#input_search_word").bind("click", function(){
+                _private.clearSearchList();
+            });
+            $("#input_search_word").bind("keydown", function(){
+                _private.clearSearchList();
+            });
         },
         
 		locationEventShow: function() {
@@ -145,6 +161,8 @@
 		},
         
         showEventList: function(e){
+            
+            _mese = e.view.params.mese;
             
             var dataSource = new kendo.data.DataSource({
                 transport: {
@@ -163,8 +181,7 @@
                                 dataType: "json",
                                 success: function(response) {                                   
                                     //store response
-                                    
-                                    console.log(response);
+                                  
                                     localStorage.setItem(e.view.params.mese, JSON.stringify(response));
                                     //pass the pass response to the DataSource
                                     operation.success(response);
@@ -197,6 +214,50 @@
                     template: $("#evento-details-template").text(),
                 });
             _address = e.view.params.address;           
+        },
+        
+        facebookAction: function(e){
+            console.log(e);
+        },
+        
+        searchAction: function(e){
+            
+            var query = $('#input_search_word').val(); 
+            
+            var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: function(operation) {                            
+                            var cashedData = localStorage.getItem(_mese);
+                            operation.success(JSON.parse(cashedData));            
+                        }
+                    },
+                    schema: { // describe the result format
+                        data: "eventi" 
+                    }
+                });
+            
+                
+            
+                                
+                dataSource.filter({
+                    field: "descrizione",
+                    operator: function(item, value){
+                       
+                        if( (item.toLowerCase().indexOf(value.toLowerCase()) > 0) ) return true;
+                        else return false;
+                    },
+                    value: "'" + query.trim() +"'"
+                });
+            
+             
+            
+                $("#search-result-listview").kendoMobileListView({
+                    dataSource: dataSource.view(),
+                    template: $("#eventi-template").text()
+                });
+        },
+        searchShow:function(e){
+            e.view.element.find("input[type=search]").focus();            
         }
 	};
     
@@ -205,6 +266,9 @@
         showEventDetails: _app.showEventDetails,
         showEventList: _app.showEventList,
         initApp: _app.initApp,
-        locationEventShow:_app.locationEventShow
+        locationEventShow:_app.locationEventShow,
+        facebookAction: _app.facebookAction,
+        searchAction: _app.searchAction,
+        searchShow:_app.searchShow
 	});
 }(jQuery, document));
