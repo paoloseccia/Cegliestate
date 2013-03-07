@@ -38,13 +38,9 @@
 								<a href="#eventi-listview?mese=settembre">Settembre</a>
 							</li>
 						</ul>
-					</li>
-					<li>
-						Info
-						<ul>
-							<li data-icon="info"><a href="#">Scopri chi siamo</a></li>
-						</ul>
-					</li>
+					</li><br/>
+                    <li class="buttons"><i></i><a data-role="button" data-icon="info" href="#info">Scopri chi siamo</a></li>
+					
 				</ul>
 			</div>
 			<div data-role="footer" class="advertise"></div>
@@ -67,9 +63,6 @@
 					</li>
 				</ul>
 			</div>
-            <ul data-role="actionsheet" id="searchActions"  data-popup='{"direction": "left"}'>
-                <li><input type="search" value="Cerca..." /></li>
-            </ul>
 			<div data-role="footer" class="advertise"></div>
 		</div>
 
@@ -110,7 +103,7 @@
                 <div class="search-header">
                     <form action="javascript:searchAction();">
                         <input id="input_search_word" type="search" 
-                            placeholder="Cerca evento" autocapitalize="off" autocorrect="off"/>
+                            placeholder="nome, descrizione evento" autocapitalize="off" autocorrect="off"/>
                     </form>
                 </div>
 			</header>                
@@ -118,6 +111,28 @@
                 <ul data-role="listview"  data-style="inset" data-type="group">
             		<li>
                         <ul id="search-result-listview"></ul>
+            		</li>
+            	</ul>
+            </div>
+		</div>
+        
+        <!-- search -->
+        <div data-role="view" id="info" >
+			<header data-role="header">
+				<div data-role="navbar">
+					<a  class="nav-button" data-align="left" data-role="backbutton">Back</a>
+					<span data-role="view-title">Chia siamo</span>   
+				</div>
+			</header>                
+            <div data-role="content"> 
+                <ul data-role="listview"  data-style="inset" data-type="group">
+            		<li>
+                        <ul>
+                            <li>
+                                <h3>Patch</h3>
+                                <p>Siamo noi</p>
+                            </li>
+                        </ul>
             		</li>
             	</ul>
             </div>
@@ -138,11 +153,11 @@
         
         <!-- TEMPLATE -->
 		<script id="eventi-template" type="text/x-kendo-template">			
-			<img class="item-photo" src="images/logo-x-app.png" />
+			<img class="item-photo" src="img/logo-x-app.png" />
 			<h3 class="item-title">${nome}</h3>
 			<p class="item-info">${data} Ore ${ora}</p>
 			<p class="item-desc">${descrizione}</p>			
-            <a data-role="detailbutton" data-style="detaildisclose" href="\#evento-details?nome=${nome}&data=${data}&ora=${ora}&descrizione=${descrizione}&address=${indirizzo}"></a>                    
+            <a data-role="button"  href="\#evento-details?nome=${nome}&data=${data}&ora=${ora}&descrizione=${descrizione}&address=${indirizzo}" class="item-link" data-icon="more"></a>                    
 		</script>
 		<script id="evento-details-template" type="text/x-kendo-template">
 			<h1>${nome}</h1>
@@ -171,12 +186,12 @@
         
         
         <!-- Scripts section -->  
-    
+        <script src="cordova.js"></script>
 		<script src="kendo/js/jquery.min.js"></script>
 		<script src="kendo/js/kendo.mobile.min.js"></script>
 		<script src="scripts/main.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-		<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
+		<!--script src="phonegap.js" type="text/javascript" charset="utf-8"></script-->
 			
 		<script>
 			// Wait for PhoneGap to load

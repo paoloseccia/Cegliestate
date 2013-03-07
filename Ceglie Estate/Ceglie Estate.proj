@@ -7,12 +7,12 @@
     <ProjectName>Ceglie Estate</ProjectName>
     <IsRunnable>true</IsRunnable>
     <TemplateAppName>Cordova220</TemplateAppName>
-    <AndroidPermissions>android.permission.CAMERA;android.permission.VIBRATE;android.permission.ACCESS_COARSE_LOCATION;android.permission.ACCESS_FINE_LOCATION;android.permission.ACCESS_LOCATION_EXTRA_COMMANDS;android.permission.READ_PHONE_STATE;android.permission.INTERNET;android.permission.RECEIVE_SMS;android.permission.RECORD_AUDIO;android.permission.MODIFY_AUDIO_SETTINGS;android.permission.READ_CONTACTS;android.permission.WRITE_CONTACTS;android.permission.WRITE_EXTERNAL_STORAGE;android.permission.ACCESS_NETWORK_STATE;android.permission.ACCOUNT_MANAGER;android.permission.GET_ACCOUNTS;android.permission.MANAGE_ACCOUNTS;android.permission.BROADCAST_STICKY</AndroidPermissions>
+    <AndroidPermissions>android.permission.VIBRATE;android.permission.ACCESS_COARSE_LOCATION;android.permission.ACCESS_FINE_LOCATION;android.permission.ACCESS_LOCATION_EXTRA_COMMANDS;android.permission.READ_PHONE_STATE;android.permission.INTERNET;android.permission.WRITE_EXTERNAL_STORAGE;android.permission.ACCESS_NETWORK_STATE;android.permission.ACCOUNT_MANAGER;android.permission.GET_ACCOUNTS;android.permission.BROADCAST_STICKY</AndroidPermissions>
     <DeviceOrientations>Portrait;Landscape</DeviceOrientations>
     <iOSStatusBarStyle>BlackTranslucent</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <BundleVersion>1.0</BundleVersion>
-    <iOSDisplayName>Ceglie Estate</iOSDisplayName>
+    <iOSDisplayName>Cegliestate</iOSDisplayName>
     <AndroidVersionCode>1</AndroidVersionCode>
   </PropertyGroup>
   <ItemGroup>
@@ -35,17 +35,7 @@
     <Folder Include="App_Resources\Android\drawable-nodpi">
       <Platform>Android</Platform>
     </Folder>
-    <Folder Include="images" />
-    <Folder Include="res" />
-    <Folder Include="res\icon" />
-    <Folder Include="res\icon\android" />
-    <Folder Include="res\icon\android\drawable-hdpi" />
-    <Folder Include="res\icon\android\drawable-ldpi" />
-    <Folder Include="res\icon\android\drawable-mdpi" />
-    <Folder Include="res\icon\ios" />
-    <Folder Include="res\screen" />
-    <Folder Include="res\screen\android" />
-    <Folder Include="res\screen\ios" />
+    <Folder Include="img" />
     <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
@@ -73,8 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="conf.xml" />
-    <Content Include="images\logo-x-app.png" />
-    <Content Include="images\sfondo.jpg" />
+    <Content Include="img\logo-x-app.png" />
     <Content Include="index.html" />
     <Content Include="kendo\js\jquery.min.js" />
     <Content Include="kendo\js\kendo.mobile.min.js" />
@@ -82,18 +71,6 @@
     <Content Include="kendo\styles\images\KendoUI.ttf" />
     <Content Include="kendo\styles\images\KendoUI.woff" />
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
-    <Content Include="res\icon\android\drawable-hdpi\icon.png" />
-    <Content Include="res\icon\android\drawable-ldpi\icon.png" />
-    <Content Include="res\icon\android\drawable-mdpi\icon.png" />
-    <Content Include="res\icon\ios\icon-72.png" />
-    <Content Include="res\icon\ios\icon-72@2x.png" />
-    <Content Include="res\icon\ios\icon.png" />
-    <Content Include="res\icon\ios\icon@2x.png" />
-    <Content Include="res\screen\android\Default.png" />
-    <Content Include="res\screen\ios\Default-Landscape.png" />
-    <Content Include="res\screen\ios\Default-Portrait.png" />
-    <Content Include="res\screen\ios\Default.png" />
-    <Content Include="res\screen\ios\Default@2x.png" />
     <Content Include="scripts\main.js" />
     <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">

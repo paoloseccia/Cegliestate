@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns     = "http://www.w3.org/ns/widgets"
 				xmlns:gap = "http://phonegap.com/ns/1.0"
-				id        = "com.phonegap.hello-world"
+				id        = "com.patch.cegliestate"
 				version   = "2.2.0">
 	
     <name>Cegliestate</name>
@@ -22,6 +22,7 @@
 	<preference name="fullscreen"       value="false" />
 
 	
+    <icon src="res/icon/ios/icon.png"/>
 
 	<icon src="res/icon/android/drawable-ldpi/icon.png"   gap:platform="android"    gap:density="ldpi" />
 	<icon src="res/icon/android/drawable-mdpi/icon.png"   gap:platform="android"    gap:density="mdpi" />

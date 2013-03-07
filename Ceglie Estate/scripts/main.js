@@ -24,7 +24,6 @@
                     center: results[0].geometry.location,
     				mapTypeControl: false,
                     streetViewControl: false,
-    				navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL },
     				mapTypeId: google.maps.MapTypeId.ROADMAP
     			};
             
