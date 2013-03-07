@@ -187,24 +187,23 @@
         
         <!-- Scripts section -->  
         <script src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="Plugins/Child Browser/childbrowser.js"></script>
+        
 		<script src="kendo/js/jquery.min.js"></script>
 		<script src="kendo/js/kendo.mobile.min.js"></script>
+        
+        <script type="text/javascript" charset="utf-8" src="scripts/jso.js"></script>
 		<script src="scripts/main.js"></script>
+        
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        
 		<!--script src="phonegap.js" type="text/javascript" charset="utf-8"></script-->
 			
 		<script>
 			// Wait for PhoneGap to load
-			document.addEventListener("deviceready", onDeviceReady, false);   
-			
-			// PhoneGap is ready
-			function onDeviceReady() {
-				initApp();
-                document.addEventListener("backbutton", onBackKeyDown, false); 
-			}
-            function onBackKeyDown(){
-               return;
-            }
+			document.addEventListener("deviceready", deviceReady, false);
+            document.addEventListener("backbutton", function(){}, false); 
+		
 		
 			var app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home", platform: "ios" });
 		</script>

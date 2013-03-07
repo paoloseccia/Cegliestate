@@ -216,7 +216,27 @@
         },
         
         facebookAction: function(e){
-            console.log(e);
+            // Perform the protected OAuth calls.
+            $.oajax({
+                type: "POST",
+                url: "https://graph.facebook.com/me/feed",
+                jso_provider: "facebook",
+                jso_scopes: ["read_stream", "publish_stream"],
+                jso_allowia: true,
+                dataType: 'json',
+                data: {
+                    message: "WOW with my Icenium mobile application I can post to my Facebook wall!",
+                    link: "http://icenium.com/?utm_source=facebook&utm_medium=post&utm_campaign=sampleapp",
+                    picture: "http://www.icenium.com/iceniumImages/features-main-images/how-it-works.png"
+                },
+                success: function(data) {
+                    console.log("Post response (facebook):");
+                    console.log(data);
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            });
         },
         
         searchAction: function(e){
@@ -257,6 +277,46 @@
         },
         searchShow:function(e){
             e.view.element.find("input[type=search]").focus();            
+        },
+        
+        deviceReady: function(){
+            _app.initApp();
+            
+            
+            var debug = true;
+            
+             // Use ChildBrowser instead of redirecting the main page.
+            jso_registerRedirectHandler(window.plugins.childBrowser.showWebPage);
+            
+            
+            /*
+             * Register a handler on the childbrowser that detects redirects and
+             * lets JSO to detect incomming OAuth responses and deal with the content.
+             */
+            window.plugins.childBrowser.onLocationChange = function(url){
+                url = decodeURIComponent(url);
+                console.log("Checking location: " + url);
+                jso_checkfortoken('facebook', url, function() {
+                    console.log("Closing child browser, because a valid response was detected.");
+                    window.plugins.childBrowser.close();
+                });
+            };
+            
+            
+            /*
+             * Configure the OAuth providers to use.
+             */
+            jso_configure({
+                "facebook": {
+                    client_id: "491900134205827",
+                    redirect_uri: "http://www.facebook.com/connect/login_success.html",
+                    authorization: "https://www.facebook.com/dialog/oauth",
+                    presenttoken: "qs"
+                }
+            }, {"debug": debug});
+            
+            
+            
         }
 	};
     
@@ -264,10 +324,10 @@
 	$.extend(window, {
         showEventDetails: _app.showEventDetails,
         showEventList: _app.showEventList,
-        initApp: _app.initApp,
         locationEventShow:_app.locationEventShow,
         facebookAction: _app.facebookAction,
         searchAction: _app.searchAction,
-        searchShow:_app.searchShow
+        searchShow:_app.searchShow,
+        deviceReady:_app.deviceReady
 	});
 }(jQuery, document));
