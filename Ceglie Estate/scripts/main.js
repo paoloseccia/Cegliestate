@@ -148,12 +148,37 @@
                          
             if(cashedData == null || cashedData == undefined) {
                 _private.getData('app', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate.json');
-            } 
+            }
+            
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function(operation) {                         
+                        operation.success(JSON.parse(cashedData));
+                    }
+                },
+                schema: { // describe the result format
+                    data: "mesi" 
+                }
+            });
+
+                
+            $("#mesi-listview").kendoMobileListView({
+                dataSource: dataSource,
+                template: $("#mesi-template").text(),
+            });
+            
             
             jsondata = JSON.parse(cashedData);
             
             _citta = jsondata.citta;
-            _provincia = jsondata.
+            _provincia = jsondata.provincia;
+            
+            //Set title
+            $('#home').find("[data-role=view-title]").text(jsondata.nome);
+            
+            $.each(jsondata.mesi, function(key, value){
+                _private.getData(value.id, value.dataUrl);
+            });
             
             //Update day eventconsole
             _private.getDayEvent();
