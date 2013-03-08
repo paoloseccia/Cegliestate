@@ -60,20 +60,30 @@
         
         getDayEvent: function(){
             var now = new Date(),
-    			d = now.getMonth(),
+    			d = now.getMonth()+1,
 					dN = null,
                     days = ["LUNEDI", "MARTEDI","MERCOLEDI","GIOVEDI", "VENERDI","SABATO","DOMENICA"],
                     ds = [{tot_e:0}];
                
            
 					
-        	if(d == 5)dN = 'giugno';
-        	else if(d == 6)dN = 'luglio';
-        	else if(d == 7)dN = 'agosto';
-        	else if(d == 8)dN = 'settembre';
+        	if(d == 1)dN = 'gennaio';
+        	else if(d == 2)dN = 'febbraio';
+        	else if(d == 3)dN = 'marzo';
+        	else if(d == 4)dN = 'aprile';
+            else if(d == 5)dN = 'maggio';
+            else if(d == 6)dN = 'giugno';
+            else if(d == 7)dN = 'luglio';
+            else if(d == 8)dN = 'agosto';
+            else if(d == 9)dN = 'settembre';
+            else if(d == 10)dN = 'ottobre';
+            else if(d == 11)dN = 'novembre';
+            else if(d == 12)dN = 'dicembre';
+            
+            var cashedData = localStorage.getItem(d);
     		
             
-    		if(dN != null){
+    		 if(cashedData != null || cashedData != undefined) {
                 
                 var query = days[now.getDay()-1] + " " + now.getDate() + " " + dN.toUpperCase();
                
@@ -98,9 +108,9 @@
                 
                 localStorage.setItem('days', '{"eventi":' +  String(JSON.stringify(dataSource.view()) + '}'));  
                 
-                var cashedData = localStorage.getItem('days'),             
+                var dData = localStorage.getItem('days'),             
                     len = dataSource.view().length,
-                    jsondata = JSON.parse(cashedData);
+                    jsondata = JSON.parse(dData);
                   
                 ds = [{tot_e:len}];
                 
@@ -133,17 +143,17 @@
             //clear cache
             //localStorage.clear();
             
-            //Update giugno
-            _private.getData('giugno', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate_giugno.json');
+            var cashedData = localStorage.getItem('app'),
+                jsondata;
+                         
+            if(cashedData == null || cashedData == undefined) {
+                _private.getData('app', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate.json');
+            } 
             
-            //Update luglio
-            _private.getData('luglio', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate_luglio.json');
+            jsondata = JSON.parse(cashedData);
             
-            //Update agosto
-            _private.getData('agosto', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate_agosto.json');
-            
-            //Update settembre
-            _private.getData('settembre', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate_settembre.json');
+            _citta = jsondata.citta;
+            _provincia = jsondata.
             
             //Update day eventconsole
             _private.getDayEvent();
@@ -286,34 +296,34 @@
             var debug = true;
             
              // Use ChildBrowser instead of redirecting the main page.
-            jso_registerRedirectHandler(window.plugins.childBrowser.showWebPage);
+            //jso_registerRedirectHandler(window.plugins.childBrowser.showWebPage);
             
             
             /*
              * Register a handler on the childbrowser that detects redirects and
              * lets JSO to detect incomming OAuth responses and deal with the content.
              */
-            window.plugins.childBrowser.onLocationChange = function(url){
+            /*window.plugins.childBrowser.onLocationChange = function(url){
                 url = decodeURIComponent(url);
                 console.log("Checking location: " + url);
                 jso_checkfortoken('facebook', url, function() {
                     console.log("Closing child browser, because a valid response was detected.");
                     window.plugins.childBrowser.close();
                 });
-            };
+            };*/
             
             
             /*
              * Configure the OAuth providers to use.
              */
-            jso_configure({
-                "facebook": {
-                    client_id: "491900134205827",
-                    redirect_uri: "http://www.facebook.com/connect/login_success.html",
-                    authorization: "https://www.facebook.com/dialog/oauth",
-                    presenttoken: "qs"
-                }
-            }, {"debug": debug});
+			/*jso_configure({
+				"facebook": {
+					client_id: "491900134205827",
+					redirect_uri: "http://www.facebook.com/connect/login_success.html",
+					authorization: "https://www.facebook.com/dialog/oauth",
+					presenttoken: "qs"
+				}
+			}, {"debug": debug});*/
             
             
             
