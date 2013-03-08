@@ -13,7 +13,7 @@
 		<section data-role="view" id="home" data-title="Ceglie Estate 2013" data-init="dayEvent">
 			<header data-role="header">
 				<div data-role="navbar">
-					<span data-role="view-title">Ceglie Estate 2013</span>
+					<span data-role="view-title"></span>
 				</div>
 			</header>
 			<div data-role="content">
@@ -24,20 +24,7 @@
 					</li>
 					<li>
 						Scopri glie eventi del mese
-						<ul>
-							<li>
-								<a href="#eventi-listview?mese=giugno">Giugno</a>
-							</li>
-							<li>
-								<a href="#eventi-listview?mese=luglio">Luglio</a>
-							</li>
-							<li>
-								<a href="#eventi-listview?mese=agosto">Agosto</a>
-							</li>
-							<li>
-								<a href="#eventi-listview?mese=settembre">Settembre</a>
-							</li>
-						</ul>
+						<ul id="mesi-listview"></ul>
 					</li><br/>
                     <li class="buttons"><i></i><a data-role="button" data-icon="info" href="#info">Scopri chi siamo</a></li>
 					
@@ -152,6 +139,9 @@
        
         
         <!-- TEMPLATE -->
+        <script id="mesi-template" type="text/x-kendo-template">			
+	        <a href="\#eventi-listview?mese=${id}">${nome}</a>                   
+		</script>
 		<script id="eventi-template" type="text/x-kendo-template">			
 			<img class="item-photo" src="img/logo-x-app.png" />
 			<h3 class="item-title">${nome}</h3>

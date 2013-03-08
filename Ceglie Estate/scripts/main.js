@@ -4,7 +4,9 @@
     	_private,
         _mapObj,
         _address,
-        _mese;
+        _mese,
+        _citta,
+        _provincia;
     
 	//Private methods
 	_private = {		
@@ -24,6 +26,7 @@
                     center: results[0].geometry.location,
     				mapTypeControl: false,
                     streetViewControl: false,
+                    navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL },
     				mapTypeId: google.maps.MapTypeId.ROADMAP
     			};
             
@@ -254,9 +257,6 @@
                         data: "eventi" 
                     }
                 });
-            
-                
-            
                                 
                 dataSource.filter({
                     field: "descrizione",
