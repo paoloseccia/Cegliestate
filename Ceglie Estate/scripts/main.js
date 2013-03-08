@@ -80,24 +80,25 @@
             else if(d == 11)dN = 'novembre';
             else if(d == 12)dN = 'dicembre';
             
+            
             var cashedData = localStorage.getItem(d);
     		
             
     		 if(cashedData != null || cashedData != undefined) {
                 
-                var query = days[now.getDay()-1] + " " + now.getDate() + " " + dN.toUpperCase();
-               
-                var dataSource = new kendo.data.DataSource({
-                    transport: {
-                        read: function(operation) {                            
-                            var cashedData = localStorage.getItem(dN);
-                            operation.success(JSON.parse(cashedData));            
+                var query = days[now.getDay()-1] + " " + now.getDate() + " " + dN.toUpperCase(),
+              
+                    dataSource = new kendo.data.DataSource({
+                        transport: {
+                            read: function(operation) {                            
+                                var cashedData = localStorage.getItem(d);
+                                operation.success(JSON.parse(cashedData));            
+                            }
+                        },
+                        schema: { // describe the result format
+                            data: "eventi" 
                         }
-                    },
-                    schema: { // describe the result format
-                        data: "eventi" 
-                    }
-                });
+                    });
                 
                 dataSource.filter({
                     field: "data",
@@ -107,6 +108,7 @@
                 
                 
                 localStorage.setItem('days', '{"eventi":' +  String(JSON.stringify(dataSource.view()) + '}'));  
+                 
                 
                 var dData = localStorage.getItem('days'),             
                     len = dataSource.view().length,
@@ -139,6 +141,8 @@
         
         
         initApp:function(){
+            
+            document.addEventListener("backbutton", function(){}, false); 
             
             //clear cache
             //localStorage.clear();
@@ -180,7 +184,7 @@
                 _private.getData(value.id, value.dataUrl);
             });
             
-            //Update day eventconsole
+            //Update day event
             _private.getDayEvent();
             
             
@@ -203,28 +207,9 @@
             
             var dataSource = new kendo.data.DataSource({
                 transport: {
-                    read: function(operation) {                        
-                        
+                    read: function(operation) {         
                         var cashedData = localStorage.getItem(e.view.params.mese);
-                         
-                        if(cashedData != null || cashedData != undefined) {
-                            //if local data exists load from it
-                            operation.success(JSON.parse(cashedData));
-                        } else {
-                          
-                            $.ajax({ //using jsfiddle's echo service to simulate remote data loading
-                                url: "http://wih.alwaysdata.net/cegliestate/datastore/cegliestate_"+e.view.params.mese+".json",
-                                type: "POST",
-                                dataType: "json",
-                                success: function(response) {                                   
-                                    //store response
-                                  
-                                    localStorage.setItem(e.view.params.mese, JSON.stringify(response));
-                                    //pass the pass response to the DataSource
-                                    operation.success(response);
-                                }
-                            });
-                        }                 
+                        operation.success(JSON.parse(cashedData));             
                     }
                 },
                 schema: { // describe the result format
@@ -240,7 +225,7 @@
                 
             e.view.element
                 .find("[data-role=view-title]")
-                .text( "Eventi di " + e.view.params.mese);
+                .text( "Eventi di " + e.view.params.nome_mese);
         },
         
         showEventDetails: function(e){
@@ -250,7 +235,7 @@
                     dataSource: dataSource,
                     template: $("#evento-details-template").text(),
                 });
-            _address = e.view.params.address;           
+            _address = e.view.params.address + ", " + _citta + ", " + _provincia;           
         },
         
         facebookAction: function(e){
@@ -280,6 +265,8 @@
         searchAction: function(e){
             
             var query = $('#input_search_word').val(); 
+            
+            if(query.length < 3) return;
             
             var dataSource = new kendo.data.DataSource({
                     transport: {

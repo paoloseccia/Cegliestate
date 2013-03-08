@@ -140,7 +140,7 @@
         
         <!-- TEMPLATE -->
         <script id="mesi-template" type="text/x-kendo-template">			
-	        <a href="\#eventi-listview?mese=${id}">${nome}</a>                   
+	        <a href="\#eventi-listview?mese=${id}&nome_mese=${nome}">${nome}</a>                   
 		</script>
 		<script id="eventi-template" type="text/x-kendo-template">			
 			<img class="item-photo" src="img/logo-x-app.png" />
@@ -191,9 +191,7 @@
 			
 		<script>
 			// Wait for PhoneGap to load
-			document.addEventListener("deviceready", deviceReady, false);
-            document.addEventListener("backbutton", function(){}, false); 
-		
+			document.addEventListener("deviceready", deviceReady, false);		
 		
 			var app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home", platform: "ios" });
 		</script>
