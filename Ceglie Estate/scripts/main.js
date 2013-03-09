@@ -35,7 +35,7 @@
                 new google.maps.Marker({
                     map: _mapObj,
                     position: results[0].geometry.location,
-                    //animation:google.maps.Animation.DROP
+                    animation:google.maps.Animation.DROP
                 });
                   
                 google.maps.event.trigger(_mapObj, "resize");
@@ -229,7 +229,7 @@
         },
         
         showEventDetails: function(e){
-            var dataSource = [{nome:e.view.params.nome, data:e.view.params.data, ora: e.view.params.ora, descrizione:e.view.params.descrizione}];
+            var dataSource = [{nome:e.view.params.nome, data:e.view.params.data, ora: e.view.params.ora, descrizione:e.view.params.descrizione, tipo:e.view.params.tipo}];
                 
                 $("#flat-details-listview").kendoMobileListView({
                     dataSource: dataSource,

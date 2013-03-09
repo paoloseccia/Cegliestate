@@ -37,6 +37,7 @@
     </Folder>
     <Folder Include="img" />
     <Folder Include="scripts" />
+    <Folder Include="styles\images" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="App_Resources\iOS\icon.png" />
@@ -72,6 +73,16 @@
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
     <Content Include="scripts\jso.js" />
     <Content Include="scripts\main.js" />
+    <Content Include="styles\images\cinema.png" />
+    <Content Include="styles\images\eventi.png" />
+    <Content Include="styles\images\mercatino.png" />
+    <Content Include="styles\images\mostre.png" />
+    <Content Include="styles\images\musica.png" />
+    <Content Include="styles\images\sagre.png" />
+    <Content Include="styles\images\sfondo.png" />
+    <Content Include="styles\images\spettacolo.png" />
+    <Content Include="styles\images\teatro.png" />
+    <Content Include="styles\images\sport.png" />
     <Content Include="styles\main.css" />
     <Content Include="cordova.ios.js">
       <Platform>iOS</Platform>

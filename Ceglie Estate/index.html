@@ -142,18 +142,24 @@
         <script id="mesi-template" type="text/x-kendo-template">			
 	        <a href="\#eventi-listview?mese=${id}&nome_mese=${nome}">${nome}</a>                   
 		</script>
-		<script id="eventi-template" type="text/x-kendo-template">			
-			<img class="item-photo" src="img/logo-x-app.png" />
+        
+		<script id="eventi-template" type="text/x-kendo-template">            
+            <div class="item-photo ${tipo}"></div>
 			<h3 class="item-title">${nome}</h3>
 			<p class="item-info">${data} Ore ${ora}</p>
 			<p class="item-desc">${descrizione}</p>			
-            <a data-role="button"  href="\#evento-details?nome=${nome}&data=${data}&ora=${ora}&descrizione=${descrizione}&address=${indirizzo}" class="item-link" data-icon="more"></a>                    
+            <a data-role="button"  href="\#evento-details?tipo=${tipo}&nome=${nome}&data=${data}&ora=${ora}&descrizione=${descrizione}&address=${indirizzo}" class="item-link" data-icon="more"></a>                    
 		</script>
+        
 		<script id="evento-details-template" type="text/x-kendo-template">
-			<h1>${nome}</h1>
-			<p>#=data# Ore #=ora#</p>
-			<p>#=descrizione#</p>
+            <!--<div class="item-photo ${tipo}"></div>-->
+            <div class="${tipo}">
+                <h2>${nome}</h2>			
+    			<p>#=data# Ore #=ora#</p>
+    			<p>#=descrizione#</p>
+            </div>
 		</script>        
+        
         <script id="map-listview-template" type="text/x-kendo-template">
 			<a href="\#map-view?address=${indirizzo}">Mappa</a>
 		</script>
