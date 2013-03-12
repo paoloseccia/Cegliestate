@@ -263,7 +263,7 @@
                     template: $("#evento-details-template").text(),
                 });
             _address = e.view.params.address + ", " + _citta + ", " + _provincia;
-            console.log(_address);
+            //console.log(_address);
         },
         
         facebookAction: function(e){
