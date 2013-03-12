@@ -159,7 +159,7 @@
             
             
             
-            //document.addEventListener("backbutton", function(){}, false); 
+            document.addEventListener("backbutton", function(){}, false); 
             
             
             var cashedData = localStorage.getItem('app'),
@@ -262,7 +262,8 @@
                     dataSource: dataSource,
                     template: $("#evento-details-template").text(),
                 });
-            _address = e.view.params.address + ", " + _citta + ", " + _provincia;           
+            _address = e.view.params.address + ", " + _citta + ", " + _provincia;
+            console.log(_address);
         },
         
         facebookAction: function(e){
@@ -314,10 +315,13 @@
                     field: "descrizione",
                     operator: function(item, value){
                        
-                        if( (item.toLowerCase().indexOf(value.toLowerCase()) > 0) ) return true;
+                        /*console.log(item + " " + value);
+                        console.log((item.toLowerCase().indexOf(value.toLowerCase())));*/
+                        
+                        if( (item.toLowerCase().indexOf(value.toLowerCase()) >= 0) ) return true;
                         else return false;
                     },
-                    value: "'" + query.trim() +"'"
+                    value: "'" + query +"'"
                 });
             
              

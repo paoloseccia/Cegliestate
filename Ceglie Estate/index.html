@@ -91,31 +91,8 @@
 			<div data-role="footer" class="advertise"></div>
 		</div>
         
-        <!-- search -->
-        <div data-role="view" id="search" data-show="searchShow">
-			<header data-role="header">
-				<div data-role="navbar">
-					<a  class="nav-button" data-align="left" data-role="backbutton">Back</a>
-					<span data-role="view-title">Ricerca</span>   
-				</div>
-                
-                <div class="search-header">
-                    <form action="javascript:searchAction();">
-                        <input id="input_search_word" type="search" 
-                            placeholder="nome, descrizione evento" autocapitalize="off" autocorrect="off"/>
-                    </form>
-                </div>
-			</header>                
-            <div data-role="content"> 
-                <ul data-role="listview"  data-style="inset" data-type="group">
-            		<li>
-                        <ul id="search-result-listview"></ul>
-            		</li>
-            	</ul>
-            </div>
-		</div>
         
-        <!-- search -->
+        <!-- INFO -->
         <div data-role="view" id="info" >
 			<header data-role="header">
 				<div data-role="navbar">
@@ -166,9 +143,9 @@
 		</script>
         
 		<script id="evento-details-template" type="text/x-kendo-template">
-            <h2>${nome}</h2>			
-    	    <p>#=data# Ore #=ora#</p>
-    	    <p>#=descrizione#</p>
+            <h2 class="item-title-det">${nome}</h2>			
+    	    <p class="item-info-det">#=data# Ore #=ora#</p>
+    	    <p class="item-desc-det">#=descrizione#</p>
 		</script>        
         
         <script id="map-listview-template" type="text/x-kendo-template">
