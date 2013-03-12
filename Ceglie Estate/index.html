@@ -6,6 +6,8 @@
 
 		<link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 		<link href="styles/main.css" rel="stylesheet" />
+        
+        
 	</head>
 	<body>
 
@@ -13,7 +15,8 @@
 		<section data-role="view" id="home">
 			<header data-role="header">
 				<div data-role="navbar">
-					<span data-role="view-title"></span>
+					<span data-role="view-title"> </span>
+                    <!--<a data-role="button" data-align="right"  data-icon="refresh" data-click="refreshData"></a>-->
 				</div>
 			</header>
 			<div data-role="content">
@@ -34,15 +37,24 @@
 		</section>
 
         <!-- Lista eventi -->
-		<div data-role="view" id="eventi-listview"  data-show="showEventList">
+		<div data-role="view" id="eventi-listview"  data-show="showEventList" data-hide="resetSearch">
 			<header data-role="header">
 				<div data-role="navbar">
 					<a  class="nav-button" data-align="left" data-role="backbutton">Back</a>
 					<span data-role="view-title"></span>
-                    <a  data-align="right" data-role="button" data-icon="search"  href="#search"></a>
+                    <a  data-align="right" data-role="button" data-icon="search" data-click="searchShow" id="searchButton"></a>
 				</div>
+                
+                
+                <div class="search-header">                
+                    <form action="javascript:searchAction();">
+                            <input id="input_search_word" type="search" 
+                                placeholder="descrizione evento" autocapitalize="off" autocorrect="off"/>
+                    </form>                
+                </div>
+                
 			</header>
-
+            
 			<div data-role="content" >
 				<ul data-role="listview"  data-style="inset" data-type="group">
 					<li>
@@ -136,6 +148,8 @@
 			</header>
             <div data-role="content"><div id="map"></div></div>
         </div>
+        
+        
        
         
         <!-- TEMPLATE -->
@@ -152,12 +166,9 @@
 		</script>
         
 		<script id="evento-details-template" type="text/x-kendo-template">
-            <!--<div class="item-photo ${tipo}"></div>-->
-            <div class="${tipo}">
-                <h2>${nome}</h2>			
-    			<p>#=data# Ore #=ora#</p>
-    			<p>#=descrizione#</p>
-            </div>
+            <h2>${nome}</h2>			
+    	    <p>#=data# Ore #=ora#</p>
+    	    <p>#=descrizione#</p>
 		</script>        
         
         <script id="map-listview-template" type="text/x-kendo-template">
@@ -182,8 +193,9 @@
         
         
         <!-- Scripts section -->  
+        
         <script src="cordova.js"></script>
-        <script type="text/javascript" charset="utf-8" src="Plugins/Child Browser/childbrowser.js"></script>
+        <!--script type="text/javascript" charset="utf-8" src="Plugins/Child Browser/childbrowser.js"></script-->
         
 		<script src="kendo/js/jquery.min.js"></script>
 		<script src="kendo/js/kendo.mobile.min.js"></script>
@@ -199,7 +211,7 @@
 			// Wait for PhoneGap to load
 			document.addEventListener("deviceready", deviceReady, false);		
 		
-			var app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home", platform: "ios" });
+			window.app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home", platform: "ios" });
 		</script>
 	</body>
 </html>

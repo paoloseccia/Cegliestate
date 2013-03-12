@@ -6,18 +6,18 @@
         _address,
         _mese,
         _citta,
-        _provincia;
+        _provincia,
+        _networkState = 'nones';//navigator.network.connection.type;
     
 	//Private methods
 	_private = {		
 		initMap: function(address) {
 			
 			var myOptions,
-                geocoder = new google.maps.Geocoder();  
+                geocoder = new google.maps.Geocoder();    
             
             
-            
-            geocoder.geocode( { 'address': address}, function(results, status) {
+            geocoder.geocode({'address': address}, function(results, status) {
                 
               if (status == google.maps.GeocoderStatus.OK) {  
                   
@@ -26,7 +26,7 @@
                     center: results[0].geometry.location,
     				mapTypeControl: false,
                     streetViewControl: false,
-                    navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL },
+                    //navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL },
     				mapTypeId: google.maps.MapTypeId.ROADMAP
     			};
             
@@ -35,10 +35,10 @@
                 new google.maps.Marker({
                     map: _mapObj,
                     position: results[0].geometry.location,
-                    animation:google.maps.Animation.DROP
+                    //animation:google.maps.Animation.DROP
                 });
                   
-                google.maps.event.trigger(_mapObj, "resize");
+                //google.maps.event.trigger(_mapObj, "resize");
                   
                 
               } 
@@ -128,30 +128,55 @@
         },
         
         clearSearchList:function(){
+            
             if($("#input_search_word").val().length <=1){
-                 $("#search-result-listview").kendoMobileListView({
-                     dataSource:[]
-                 });
+                 var dataSource = new kendo.data.DataSource({
+                        transport: {
+                            read: function(operation) {         
+                                var cashedData = localStorage.getItem(_mese);
+                                operation.success(JSON.parse(cashedData));             
+                            }
+                        },
+                        schema: { // describe the result format
+                            data: "eventi" 
+                        }
+                    });
+        
+                        
+                    $("#flat-listview").kendoMobileListView({
+                        dataSource: dataSource,
+                        template: $("#eventi-template").text(),
+                    });
             }
         }
-		
+        
 	};
     
 	_app = {
         
         
-        initApp:function(){
+        initApp:function(force){
             
-            document.addEventListener("backbutton", function(){}, false); 
             
-            //clear cache
-            //localStorage.clear();
+            
+            //document.addEventListener("backbutton", function(){}, false); 
+            
             
             var cashedData = localStorage.getItem('app'),
                 jsondata;
                          
-            if(cashedData == null || cashedData == undefined) {
-                _private.getData('app', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate.json');
+            if( (cashedData == null || cashedData == undefined) || force ) {
+                
+                //controllo se connesso
+                if(_networkState != 'none'){                    
+                    //Aggiorno data-source  
+                    _private.getData('app', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate.json');
+                }else{
+                    alert('Impossibile accedere ai dati. Connessione Assente');
+                   
+                    navigator.app.exitApp();
+                }
+                
             }
             
             var dataSource = new kendo.data.DataSource({
@@ -194,6 +219,8 @@
             $("#input_search_word").bind("keydown", function(){
                 _private.clearSearchList();
             });
+            
+           // app.hideLoading(); //hide loading popup
         },
         
 		locationEventShow: function() {
@@ -266,7 +293,10 @@
             
             var query = $('#input_search_word').val(); 
             
+            
+            
             if(query.length < 3) return;
+            
             
             var dataSource = new kendo.data.DataSource({
                     transport: {
@@ -292,17 +322,42 @@
             
              
             
-                $("#search-result-listview").kendoMobileListView({
+                $("#flat-listview").kendoMobileListView({
                     dataSource: dataSource.view(),
                     template: $("#eventi-template").text()
                 });
         },
         searchShow:function(e){
-            e.view.element.find("input[type=search]").focus();            
+            
+            var searchDiv = $('.search-header'),
+                searchButton = $('#searchButton');
+            
+            if ( searchButton.text() == 'Annulla') {
+                resetSearch();  
+            }else{
+                searchButton.text('Annulla');
+                kendo.fx($(searchDiv)).expand("vertical").stop().play();
+            }
+          
+        },
+        
+        resetSearch:function(){
+            var searchDiv = $('.search-header'),
+                searchButton = $('#searchButton'),
+                inputSearch = $('#input_search_word');
+            
+           
+            searchButton.text('');   
+            var sp = $('<span class="km-icon km-search km-notext">');
+            searchButton.append(sp);
+            kendo.fx(searchDiv).expand("vertical").stop().reverse();
+            inputSearch.val('');
+            _private.clearSearchList();
         },
         
         deviceReady: function(){
-            _app.initApp();
+      
+            _app.initApp(false);
             
             
             var debug = true;
@@ -339,6 +394,17 @@
             
             
             
+        },
+        
+        refreshData:function(){            
+                
+            //controllo se connesso
+            /*if(_networkState != 'none'){             
+                _app.initApp(true);
+            }else{
+                alert('Impossibile accedere ai dati. Connessione Assente');
+                return;
+            }*/
         }
 	};
     
@@ -350,6 +416,8 @@
         facebookAction: _app.facebookAction,
         searchAction: _app.searchAction,
         searchShow:_app.searchShow,
-        deviceReady:_app.deviceReady
+        deviceReady:_app.deviceReady,
+        refreshData:_app.refreshData,
+        resetSearch:_app.resetSearch
 	});
 }(jQuery, document));

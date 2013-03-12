@@ -71,6 +71,7 @@
     <Content Include="kendo\styles\images\KendoUI.ttf" />
     <Content Include="kendo\styles\images\KendoUI.woff" />
     <Content Include="kendo\styles\kendo.mobile.all.min.css" />
+    <Content Include="scripts\ga.js" />
     <Content Include="scripts\jso.js" />
     <Content Include="scripts\main.js" />
     <Content Include="styles\images\cinema.png" />
