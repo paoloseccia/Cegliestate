@@ -7,7 +7,7 @@
         _mese,
         _citta,
         _provincia,
-        _networkState = 'nones';//navigator.network.connection.type;
+        _networkState;
     
 	//Private methods
 	_private = {		
@@ -55,6 +55,71 @@
                     //store response
                     localStorage.setItem(dataSource, JSON.stringify(response));
                 }
+            });
+        },
+        initData:function(){
+            $.ajax({ 
+                url: 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate.json',
+                type: "POST",
+                dataType: "json",
+                success: function(response) {
+                    //store response
+                    localStorage.setItem('app', JSON.stringify(response));
+                    
+                    _private.initMesi();
+                }
+            });
+        },
+        
+        initMesi:function(){
+            
+            var cashedData = localStorage.getItem('app'),
+                jsondata;
+            
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function(operation) {  
+                        operation.success(JSON.parse(cashedData));
+                    }
+                 },
+                 schema: { // describe the result format
+                     data: "mesi" 
+                 }
+            });
+        
+                        
+            $("#mesi-listview").kendoMobileListView({
+                 dataSource: dataSource,
+                 template: $("#mesi-template").text(),
+            });
+            
+            $("#mesi-listview").kendoMobileListView({
+                dataSource: dataSource,
+                template: $("#mesi-template").text(),
+            });
+            
+            
+            jsondata = JSON.parse(cashedData);
+            
+            _citta = jsondata.citta;
+            _provincia = jsondata.provincia;
+            
+            //Set title
+            $('#home').find("[data-role=view-title]").text(jsondata.nome);
+            
+            $.each(jsondata.mesi, function(key, value){
+                _private.getData(value.id, value.dataUrl);
+            });
+            
+            //Update day event
+            _private.getDayEvent();
+            
+            
+            $("#input_search_word").bind("click", function(){
+                _private.clearSearchList();
+            });
+            $("#input_search_word").bind("keydown", function(){
+                _private.clearSearchList();
             });
         },
         
@@ -157,70 +222,29 @@
         
         initApp:function(force){
             
+            _networkState = navigator.network.connection.type;
             
             
             document.addEventListener("backbutton", function(){}, false); 
             
             
-            var cashedData = localStorage.getItem('app'),
-                jsondata;
+            var cashedData = localStorage.getItem('app');
                          
-            if( (cashedData == null || cashedData == undefined) || force ) {
+            if( cashedData == null || cashedData == undefined) {
                 
                 //controllo se connesso
                 if(_networkState != 'none'){                    
                     //Aggiorno data-source  
-                    _private.getData('app', 'http://wih.alwaysdata.net/cegliestate/datastore/cegliestate.json');
+                    _private.initData();
                 }else{
                     alert('Impossibile accedere ai dati. Connessione Assente');
                    
                     navigator.app.exitApp();
                 }
                 
+            }else{
+                 _private.initMesi();
             }
-            
-            var dataSource = new kendo.data.DataSource({
-                transport: {
-                    read: function(operation) {                         
-                        operation.success(JSON.parse(cashedData));
-                    }
-                },
-                schema: { // describe the result format
-                    data: "mesi" 
-                }
-            });
-
-                
-            $("#mesi-listview").kendoMobileListView({
-                dataSource: dataSource,
-                template: $("#mesi-template").text(),
-            });
-            
-            
-            jsondata = JSON.parse(cashedData);
-            
-            _citta = jsondata.citta;
-            _provincia = jsondata.provincia;
-            
-            //Set title
-            $('#home').find("[data-role=view-title]").text(jsondata.nome);
-            
-            $.each(jsondata.mesi, function(key, value){
-                _private.getData(value.id, value.dataUrl);
-            });
-            
-            //Update day event
-            _private.getDayEvent();
-            
-            
-            $("#input_search_word").bind("click", function(){
-                _private.clearSearchList();
-            });
-            $("#input_search_word").bind("keydown", function(){
-                _private.clearSearchList();
-            });
-            
-           // app.hideLoading(); //hide loading popup
         },
         
 		locationEventShow: function() {
@@ -263,7 +287,7 @@
                     template: $("#evento-details-template").text(),
                 });
             _address = e.view.params.address + ", " + _citta + ", " + _provincia;
-            //console.log(_address);
+           
         },
         
         facebookAction: function(e){
@@ -288,6 +312,8 @@
                     console.log(e);
                 }
             });
+            
+            
         },
         
         searchAction: function(e){
@@ -313,11 +339,7 @@
                                 
                 dataSource.filter({
                     field: "descrizione",
-                    operator: function(item, value){
-                       
-                        /*console.log(item + " " + value);
-                        console.log((item.toLowerCase().indexOf(value.toLowerCase())));*/
-                        
+                    operator: function(item, value){                        
                         if( (item.toLowerCase().indexOf(value.toLowerCase()) >= 0) ) return true;
                         else return false;
                     },
@@ -363,38 +385,41 @@
       
             _app.initApp(false);
             
+           
             
             var debug = true;
             
              // Use ChildBrowser instead of redirecting the main page.
-            //jso_registerRedirectHandler(window.plugins.childBrowser.showWebPage);
+            jso_registerRedirectHandler(window.plugins.childBrowser.showWebPage);
             
             
             /*
              * Register a handler on the childbrowser that detects redirects and
              * lets JSO to detect incomming OAuth responses and deal with the content.
              */
-            /*window.plugins.childBrowser.onLocationChange = function(url){
+
+            window.plugins.childBrowser.onLocationChange = function(url){
                 url = decodeURIComponent(url);
                 console.log("Checking location: " + url);
                 jso_checkfortoken('facebook', url, function() {
                     console.log("Closing child browser, because a valid response was detected.");
                     window.plugins.childBrowser.close();
                 });
-            };*/
-            
+            };
+           
             
             /*
              * Configure the OAuth providers to use.
              */
-			/*jso_configure({
+			jso_configure({
 				"facebook": {
-					client_id: "491900134205827",
+					//client_id: "491900134205827",
+                    client_id: '537761576263898',
 					redirect_uri: "http://www.facebook.com/connect/login_success.html",
 					authorization: "https://www.facebook.com/dialog/oauth",
 					presenttoken: "qs"
 				}
-			}, {"debug": debug});*/
+			}, {"debug": debug});
             
             
             

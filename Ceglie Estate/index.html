@@ -172,7 +172,7 @@
         <!-- Scripts section -->  
         
         <script src="cordova.js"></script>
-        <!--script type="text/javascript" charset="utf-8" src="Plugins/Child Browser/childbrowser.js"></script-->
+        <script type="text/javascript" charset="utf-8" src="Plugins/Child Browser/childbrowser.js"></script>
         
 		<script src="kendo/js/jquery.min.js"></script>
 		<script src="kendo/js/kendo.mobile.min.js"></script>
@@ -188,7 +188,7 @@
 			// Wait for PhoneGap to load
 			document.addEventListener("deviceready", deviceReady, false);		
 		
-			window.app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home", platform: "ios" });
+			var app = new kendo.mobile.Application(document.body, { transition: "slide", layout: "home", platform: "ios" });
 		</script>
 	</body>
 </html>
