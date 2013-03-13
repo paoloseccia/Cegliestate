@@ -291,6 +291,7 @@
         },
         
         facebookAction: function(e){
+            console.log($('#flat-details-listview li p.item-info-det').html());
             // Perform the protected OAuth calls.
             $.oajax({
                 type: "POST",
@@ -300,9 +301,11 @@
                 jso_allowia: true,
                 dataType: 'json',
                 data: {
-                    message: "WOW with my Icenium mobile application I can post to my Facebook wall!",
-                    link: "http://icenium.com/?utm_source=facebook&utm_medium=post&utm_campaign=sampleapp",
-                    picture: "http://www.icenium.com/iceniumImages/features-main-images/how-it-works.png"
+                    message: $('#flat-details-listview li h2.item-title-det').html() + "\n" +
+                        $('#flat-details-listview li p.item-info-det').html()+ "\n" + 
+                        $('#flat-details-listview li p.item-desc-det').html(),
+                    //link: "http://icenium.com/?utm_source=facebook&utm_medium=post&utm_campaign=sampleapp",
+                   //picture:'http://wih.alwaysdata.net/cegliestate/icon.png'
                 },
                 success: function(data) {
                     console.log("Post response (facebook):");
@@ -413,8 +416,7 @@
              */
 			jso_configure({
 				"facebook": {
-					//client_id: "491900134205827",
-                    client_id: '537761576263898',
+                    client_id: '491900134205827',
 					redirect_uri: "http://www.facebook.com/connect/login_success.html",
 					authorization: "https://www.facebook.com/dialog/oauth",
 					presenttoken: "qs"
